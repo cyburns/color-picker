@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import HexCodeCell from "./HexCodeCell";
 
 interface EyeDropperConstructor {
   new (): EyeDropper;
@@ -37,6 +38,10 @@ const Picker = () => {
     }
   };
 
+  const handleClearAll = () => {
+    setNewHexCode([]);
+  };
+
   return (
     <div className="flex w-full h-full justify-center items-center flex-col max-w-xs">
       <button
@@ -55,22 +60,12 @@ const Picker = () => {
         Pick a color
       </button>
 
-      <div className="flex justify-between  w-full mt-5">
+      <div className="flex justify-between  w-full mt-5 text-gray-400">
         <h2>Colors</h2>
-        <button>Clear all</button>
+        <button onClick={handleClearAll}>Clear all</button>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 mt-7">
-        {newHexCode.map((hexCode, index) => (
-          <div key={index} className="m-1 flex flex-row items-center">
-            <div
-              style={{ backgroundColor: hexCode }}
-              className="w-5 h-5 rounded-sm mr-1"
-            />
-            <p className="font-semibold uppercase text-white">{hexCode}</p>
-          </div>
-        ))}
-      </div>
+      <HexCodeCell newHexCode={newHexCode} />
     </div>
   );
 };
